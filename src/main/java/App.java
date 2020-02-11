@@ -81,11 +81,20 @@ public class App {
 
 //        show new animal-form
 
-        get("animals/new", (req, res) ->{
+        get("/animals/new", (req, res) ->{
             Map<String, Object> model = new HashMap<>();
             List<Ranger> allRangers = rangerDao.getAll();
             model.put("rangers", allRangers);
             return new ModelAndView(model, "animal-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+//        show new endangered-animal form
+
+        get("/endangered/new", (req, res) ->{
+            Map<String, Object> model = new HashMap<>();
+            List<Ranger> allRangers = rangerDao.getAll();
+            model.put("rangers", allRangers);
+            return new ModelAndView(model, "endangered-form.hbs");
         }, new HandlebarsTemplateEngine());
 
 //        post: process new animal-form
