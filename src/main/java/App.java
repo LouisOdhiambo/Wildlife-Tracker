@@ -109,6 +109,19 @@ public class App {
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
+//        post: process endangered animal form
+
+        post("/endangered/new", (req, res) ->{
+            Map<String, Object> model = new HashMap<>();
+            List<Ranger> allRangers = rangerDao.getAll();
+            model.put("rangers", allRangers);
+            String endangeredName = req.queryParams("endangeredName");
+            String endangeredHealth = req.queryParams("endangeredHealth");
+            int rangerId = Integer.parseInt(req.queryParams("rangerId"));
+            Endangered newEndangered = new Endangered(endangeredName, endangeredHealth, rangerId);
+            endangeredDao.add(newEndangered);
+            return new ModelAndView(model,"success.hbs");
+        }, new HandlebarsTemplateEngine());
 
     }
 }
