@@ -27,7 +27,7 @@ public class Sql2oEndangeredDaoTest {
     }
 
     @Test
-    public void addingAnAnimalSetsId() throws Exception{
+    public void addingAnEndangeredAnimalSetsId() throws Exception{
         Endangered endangered = testEndangered();
         int endangeredId = endangered.getId();
         endangeredDao.add(endangered);

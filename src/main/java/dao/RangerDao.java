@@ -1,5 +1,6 @@
 package dao;
 
+import models.Endangered;
 import models.Ranger;
 import models.Animal;
 import java.util.List;
@@ -23,4 +24,5 @@ public interface RangerDao {
     void clearAllRangers();
 
     List<Animal> getAllAnimalsScoutedByRanger(int rangerId);
+    List<Endangered> getAllEndangeredSightedByRanger(int rangerId);
 }

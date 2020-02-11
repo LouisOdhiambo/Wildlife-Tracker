@@ -22,6 +22,14 @@
     {{else}}
         <p>No animals</p>
     {{/if}}
+
+    {{#if endangers}}
+        {{#each endangers }}
+            <p><a href="/rangers/{{rangerId}}/endangers/{{id}}">{{endangeredName}}</a></p>
+        {{/each}}
+    {{else}}
+        <p>No Endangered Animals</p>
+    {{/if}}
 {{/partial}}
 
 {{> layout.hbs}}

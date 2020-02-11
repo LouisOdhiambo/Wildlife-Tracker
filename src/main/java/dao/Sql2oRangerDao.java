@@ -1,5 +1,6 @@
 package dao;
 
+import models.Endangered;
 import models.Ranger;
 import models.Animal;
 import org.sql2o.Connection;
@@ -89,6 +90,15 @@ public class Sql2oRangerDao implements RangerDao {
             return con.createQuery("SELECT * FROM sightingAnimals WHERE rangerId = :rangerId")
                     .addParameter("rangerId", rangerId)
                     .executeAndFetch(Animal.class);
+        }
+    }
+
+    @Override
+    public List<Endangered> getAllEndangeredSightedByRanger(int rangerId) {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM endAnimals WHERE rangerId = :rangerId")
+                    .addParameter("rangerId", rangerId)
+                    .executeAndFetch(Endangered.class);
         }
     }
 }

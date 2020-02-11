@@ -1,7 +1,9 @@
 import dao.Sql2oRangerDao;
 import models.Animal;
+import models.Endangered;
 import models.Ranger;
 import dao.Sql2oAnimalDao;
+import dao.Sql2oEndangeredDao;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,7 @@ public class App {
         String connectionString = "jdbc:h2:~/wildlife_tracker.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
         Sql2o sql2o = new Sql2o(connectionString, "", "");
         Sql2oAnimalDao animalDao = new Sql2oAnimalDao(sql2o);
+        Sql2oEndangeredDao endangeredDao = new Sql2oEndangeredDao(sql2o);
         Sql2oRangerDao rangerDao = new Sql2oRangerDao(sql2o);
 
 //        get: show all rangers
@@ -30,9 +33,20 @@ public class App {
     get("/all/animals", (req, res) ->{
         Map<String, Object> model = new HashMap<>();
         List<Animal> animals = animalDao.getAll();
+        List<Endangered> endangers = endangeredDao.getAll();
         model.put("animals", animals);
+        model.put("endangers", endangers);
         return new ModelAndView(model, "all-animals.hbs");
     }, new HandlebarsTemplateEngine());
+
+////    get: show all sighted endangered animals
+//    get("/all/animals", (req, res) ->{
+//        Map<String, Object> model = new HashMap<>();
+//        List<Endangered> endangers = endangeredDao.getAll();
+//        model.put("endangers", endangers);
+//        return new ModelAndView(model, "all-animals.hbs");
+//    }, new HandlebarsTemplateEngine());
+
 
 //    get: show new Ranger from
      get("/rangers/new", (req, res) ->{
@@ -58,6 +72,8 @@ public class App {
             Ranger foundRanger = rangerDao.findById(idOfRangerToView);
             model.put("ranger", foundRanger);
             List<Animal> allAnimalsByThisRanger = rangerDao.getAllAnimalsScoutedByRanger(idOfRangerToView);
+            List<Endangered> allEndangeredByThisRanger = rangerDao.getAllEndangeredSightedByRanger(idOfRangerToView);
+            model.put("endangers", allEndangeredByThisRanger);
             model.put("animals", allAnimalsByThisRanger);
             model.put("rangers", rangerDao.getAll());
             return new ModelAndView(model, "ranger-detail.hbs");

@@ -1,5 +1,6 @@
 package dao;
 
+import models.Endangered;
 import models.Ranger;
 import models.Animal;
 import org.junit.After;
@@ -13,6 +14,7 @@ import static org.junit.Assert.*;
 public class Sql2oRangerDaoTest {
     private Sql2oRangerDao rangerDao;
     private Sql2oAnimalDao animalDao;
+    private Sql2oEndangeredDao endangeredDao;
     private Connection conn;
 
     @Before
@@ -108,4 +110,20 @@ public class Sql2oRangerDaoTest {
         assertTrue(rangerDao.getAllAnimalsScoutedByRanger(rangerId).contains(newAnimal2));
         assertFalse(rangerDao.getAllAnimalsScoutedByRanger(rangerId).contains(newAnimal3));
     }
+
+//    @Test
+//    public void getAllEndangeredAnimalsSightedBySpecificRangerReturnsAnimalCorrectly() throws Exception {
+//        Ranger ranger = testRanger();
+//        rangerDao.add(ranger);
+//        int rangerId = ranger.getId();
+//        Endangered testEndangered1 = new Endangered("rhino", "okay",rangerId);
+//        Endangered testEndangered2 = new Endangered("gorilla", "okay",rangerId);
+//        Endangered testEndangered3 = new Endangered("tiger", "okay",rangerId);
+//        endangeredDao.add(testEndangered1);
+//        endangeredDao.add(testEndangered2);
+//        assertEquals(2, rangerDao.getAllEndangeredSightedByRanger(rangerId).size());
+//        assertTrue(rangerDao.getAllEndangeredSightedByRanger(rangerId).contains(testEndangered1));
+//        assertTrue(rangerDao.getAllEndangeredSightedByRanger(rangerId).contains(testEndangered2));
+//        assertFalse(rangerDao.getAllEndangeredSightedByRanger(rangerId).contains(testEndangered3));
+//    }
 }
