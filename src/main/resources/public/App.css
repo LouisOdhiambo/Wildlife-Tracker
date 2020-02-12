@@ -11,6 +11,23 @@ h1{
     color: white;
 }
 
+.jumbotron{
+    color: black;
+}
+.navbar-nav{
+    padding-top: 7px;
+}
+.navbar-nav a{
+    padding-right: 10px;
+    text-decoration: underline;
+    font-size: 16px;
+}
+
+.navbar-nav a:hover{
+    text-decoration: none;
+    color: black;
+}
+
 #each-ranger{
     color: white;
     border: 2px solid white;
@@ -25,10 +42,6 @@ h1{
 
 form{
     color: white;
-}
-
-form input{
-    background: none;
 }
 
 #rangerButton{
