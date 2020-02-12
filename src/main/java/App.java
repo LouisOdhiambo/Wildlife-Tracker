@@ -12,11 +12,18 @@ import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import static spark.Spark.*;
 
-public class App {
+public class App {static int getHerokuAssignedPort() {
+    ProcessBuilder processBuilder = new ProcessBuilder();
+    if (processBuilder.environment().get("PORT") != null) {
+        return Integer.parseInt(processBuilder.environment().get("PORT"));
+    }
+    return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+}
     public static void main(String[] args) {
+        port(getHerokuAssignedPort());
         staticFileLocation("/public");
-        String connectionString = "jdbc:h2:~/wildlife_tracker.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        String connectionString = "jdbc:postgresql://localhost:5432/wildlife_tracker";
+        Sql2o sql2o = new Sql2o(connectionString, "mringaschool", "12345");
         Sql2oAnimalDao animalDao = new Sql2oAnimalDao(sql2o);
         Sql2oEndangeredDao endangeredDao = new Sql2oEndangeredDao(sql2o);
         Sql2oRangerDao rangerDao = new Sql2oRangerDao(sql2o);
@@ -38,15 +45,6 @@ public class App {
             model.put("endangers", endangers);
             return new ModelAndView(model, "all-animals.hbs");
         }, new HandlebarsTemplateEngine());
-
-////    get: show all sighted endangered animals
-//    get("/all/animals", (req, res) ->{
-//        Map<String, Object> model = new HashMap<>();
-//        List<Endangered> endangers = endangeredDao.getAll();
-//        model.put("endangers", endangers);
-//        return new ModelAndView(model, "all-animals.hbs");
-//    }, new HandlebarsTemplateEngine());
-
 
 //    get: show new Ranger from
         get("/rangers/new", (req, res) -> {

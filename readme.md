@@ -19,6 +19,8 @@ animals. A user can also update their details for example when they change locat
 ## Setup Guide
 + Clone the repository into a folder in your computer:
 + Open the project using the IDE you have installed such as intelliJ.
++ Create Database
+If you have postgres installed simply run the command (psql < create.sql to create the database)
 + Build the project using gradle and Run the project on local host.
 
 ## Known Bugs
