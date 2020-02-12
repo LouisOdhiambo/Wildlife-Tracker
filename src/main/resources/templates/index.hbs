@@ -17,11 +17,11 @@
     {{#if rangers}}
         {{#each rangers}}
             <div id="each-ranger">
-            <p><a href="/rangers/{{id}}">Ranger: {{rangerName}}</a></p>
+            <p><a href="/rangers/{{id}}">Ranger Name: {{rangerName}}</a></p>
             <a class="btn btn-primary" href="/rangers/:id" role="button">View Ranger Details</a>
             </div>
         {{/each}}
-        <a class="btn btn-primary" href="#" role="button">Add New Ranger</a>
+        <a class="btn btn-primary" href="/rangers/new" role="button">Add New Ranger</a>
 
     {{else}}
         <a class="btn btn-primary" href="/rangers/new" role="button">Register first ranger</a>

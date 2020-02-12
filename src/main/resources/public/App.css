@@ -11,6 +11,10 @@ body{
     color: white;
     font-size: 16px;
     border: 2px solid white;
-    margin: 5px;
-    padding: 5px;
+    margin: 6px;
+    padding: 6px;
+}
+
+form{
+    color: white;
 }
