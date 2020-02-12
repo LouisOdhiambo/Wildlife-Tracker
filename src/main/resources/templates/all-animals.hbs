@@ -25,9 +25,13 @@
         <p>No animals</p>
     {{/if}}
 
+    <h1>All sighted Endangered Animals</h1>
+
     {{#if endangers}}
         {{#each endangers }}
-            <p><a href="/rangers/{{rangerId}}/endangers/{{id}}">{{endangeredName}}</a></p>
+            <div id="each-ranger">
+            <p id="each-rangerName"><a href="/rangers/{{rangerId}}/endangers/{{id}}">{{endangeredName}}</a></p>
+            </div>
         {{/each}}
     {{else}}
         <p>No Endangered Animals</p>
