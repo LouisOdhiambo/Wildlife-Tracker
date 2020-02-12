@@ -20,7 +20,7 @@
             <input class="form-control form-control-lg" id="newRangerName" name="newRangerName" type="text" value="{{ranger.rangerName}}">
             <label for="newRangerLocation">Ranger Location</label>
             <input class="form-control form-control-lg" id="newRangerLocation" name="newRangerLocation" type="text" value="{{ranger.rangerLocation}}">
-            <button type="submit" class="btn btn-default">Edit</button>
+            <button id="rangerButton" type="submit" class="btn btn-default">Edit</button>
         </form>
     {{else}}
         <h1>Register new Ranger!</h1>
@@ -29,7 +29,7 @@
             <input class="form-control form-control-lg" id="rangerName" name="rangerName" type="text">
             <label for="rangerLocation">Ranger Location</label>
             <input class="form-control form-control-lg" id="rangerLocation" name="rangerLocation" type="text">
-            <button type="submit" class="btn btn-default">CREATE</button>
+            <button id="rangerButton" type="submit" class="btn btn-default">CREATE</button>
         </form>
     {{/if}}
 
