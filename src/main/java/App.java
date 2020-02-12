@@ -22,22 +22,22 @@ public class App {
         Sql2oRangerDao rangerDao = new Sql2oRangerDao(sql2o);
 
 //        get: show all rangers
-    get("/", (req, res) ->{
-        Map<String, Object> model = new HashMap<>();
-        List<Ranger> rangers = rangerDao.getAll();
-        model.put("rangers", rangers);
-        return new ModelAndView(model, "index.hbs");
-    }, new HandlebarsTemplateEngine());
+        get("/", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Ranger> rangers = rangerDao.getAll();
+            model.put("rangers", rangers);
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
 
 //    get: show all sighted animals
-    get("/all/animals", (req, res) ->{
-        Map<String, Object> model = new HashMap<>();
-        List<Animal> animals = animalDao.getAll();
-        List<Endangered> endangers = endangeredDao.getAll();
-        model.put("animals", animals);
-        model.put("endangers", endangers);
-        return new ModelAndView(model, "all-animals.hbs");
-    }, new HandlebarsTemplateEngine());
+        get("/all/animals", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Animal> animals = animalDao.getAll();
+            List<Endangered> endangers = endangeredDao.getAll();
+            model.put("animals", animals);
+            model.put("endangers", endangers);
+            return new ModelAndView(model, "all-animals.hbs");
+        }, new HandlebarsTemplateEngine());
 
 ////    get: show all sighted endangered animals
 //    get("/all/animals", (req, res) ->{
@@ -49,21 +49,21 @@ public class App {
 
 
 //    get: show new Ranger from
-     get("/rangers/new", (req, res) ->{
-         Map<String, Object> model = new HashMap<>();
-         return new ModelAndView(model, "ranger-form.hbs");
-     }, new HandlebarsTemplateEngine());
+        get("/rangers/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "ranger-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
 //     post: process new Ranger form
-     post("/rangers/new", (req, res) ->{
-         Map<String, Object> model = new HashMap<>();
-         String rangerName = req.queryParams("rangerName");
-         String rangerLocation = req.queryParams("rangerLocation");
-         Ranger newRanger = new Ranger(rangerName, rangerLocation);
-         rangerDao.add(newRanger);
-         model.put("ranger", newRanger);
-         return new ModelAndView(model, "success.hbs");
-     }, new HandlebarsTemplateEngine());
+        post("/rangers/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            String rangerName = req.queryParams("rangerName");
+            String rangerLocation = req.queryParams("rangerLocation");
+            Ranger newRanger = new Ranger(rangerName, rangerLocation);
+            rangerDao.add(newRanger);
+            model.put("ranger", newRanger);
+            return new ModelAndView(model, "success.hbs");
+        }, new HandlebarsTemplateEngine());
 
 //      get: show all animals sighted by a Ranger
         get("/rangers/:id", (req, res) -> {
@@ -81,23 +81,14 @@ public class App {
 
 //        show new animal-form
 
-        get("/animals/new", (req, res) ->{
+        get("/animals/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Ranger> allRangers = rangerDao.getAll();
             model.put("rangers", allRangers);
             return new ModelAndView(model, "animal-form.hbs");
         }, new HandlebarsTemplateEngine());
 
-//        show new endangered-animal form
-
-        get("/endangered/new", (req, res) ->{
-            Map<String, Object> model = new HashMap<>();
-            List<Ranger> allRangers = rangerDao.getAll();
-            model.put("rangers", allRangers);
-            return new ModelAndView(model, "endangered-form.hbs");
-        }, new HandlebarsTemplateEngine());
-
-//        post: process new animal-form
+        //        post: process new animal-form
         post("/animals/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Ranger> allRangers = rangerDao.getAll();
@@ -109,9 +100,18 @@ public class App {
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
-//        post: process endangered animal form
+//        show new endangered-animal form
 
-        post("/endangered/new", (req, res) ->{
+        get("/endangers/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Ranger> allRangers = rangerDao.getAll();
+            model.put("rangers", allRangers);
+            return new ModelAndView(model, "endangered-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //        post: process endangered animal form
+
+        post("/endangers/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Ranger> allRangers = rangerDao.getAll();
             model.put("rangers", allRangers);
@@ -120,7 +120,7 @@ public class App {
             int rangerId = Integer.parseInt(req.queryParams("rangerId"));
             Endangered newEndangered = new Endangered(endangeredName, endangeredHealth, rangerId);
             endangeredDao.add(newEndangered);
-            return new ModelAndView(model,"success.hbs");
+            return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
     }

@@ -18,7 +18,7 @@
     <form action="/animals/new" method="post">
         {{#if rangers}}
             <label for="animalName">animalName</label>
-            <input id="animalName" name="animalName" type="text">
+            <input class="form-control form-control-lg" id="animalName" name="animalName" type="text">
             <label for="rangerId">Which Ranger Sighted this animal</label>
             <select id="rangerId" name="rangerId">
                 {{#each rangers}}

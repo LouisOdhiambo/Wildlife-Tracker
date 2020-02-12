@@ -17,18 +17,18 @@
         <h1>Edit this Ranger!</h1>
         <form action="/rangers/{{ranger.id}}/edit" method="post">
             <label for="rangerName">Edit this ranger's name</label>
-            <input id="newRangerName" name="newRangerName" type="text" value="{{ranger.rangerName}}">
+            <input class="form-control form-control-lg" id="newRangerName" name="newRangerName" type="text" value="{{ranger.rangerName}}">
             <label for="newRangerLocation">Ranger Location</label>
-            <input id="newRangerLocation" name="newRangerLocation" type="text" value="{{ranger.rangerLocation}}">
+            <input class="form-control form-control-lg" id="newRangerLocation" name="newRangerLocation" type="text" value="{{ranger.rangerLocation}}">
             <button type="submit" class="btn btn-default">Edit</button>
         </form>
     {{else}}
         <h1>Register new Ranger!</h1>
         <form action="/rangers/new" method="post">
             <label for="rangerName">Ranger Name</label>
-            <input id="rangerName" name="rangerName" type="text">
+            <input class="form-control form-control-lg" id="rangerName" name="rangerName" type="text">
             <label for="rangerLocation">Ranger Location</label>
-            <input id="rangerLocation" name="rangerLocation" type="text">
+            <input class="form-control form-control-lg" id="rangerLocation" name="rangerLocation" type="text">
             <button type="submit" class="btn btn-default">CREATE</button>
         </form>
     {{/if}}
