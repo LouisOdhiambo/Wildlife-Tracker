@@ -6,7 +6,6 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="/rangers/new">Add New Ranger</a>
-<!--                    <a class="nav-item nav-link" href="/animals/new">Add Sighting</a>-->
                     <a class="nav-item nav-link" href="/all/animals">View all Animals</a>
                 </div>
             </div>
@@ -17,17 +16,17 @@
 
     {{#if rangers}}
         {{#each rangers}}
-            <li><a href="/rangers/{{id}}">{{rangerName}}</a></li>
-            <p><a href="/rangers/:id">view details</a></p>
+            <p><a href="/rangers/{{id}}">Ranger: {{rangerName}}</a></p>
+            <a class="btn btn-primary" href="/rangers/:id" role="button">View Ranger Details</a>
         {{/each}}
-        <li><a href="/rangers/new">Add a Ranger</a></li>
+        <a class="btn btn-primary" href="#" role="button">Add New Ranger</a>
 
     {{else}}
-        <li><a href="/rangers/new">Add first ranger</a></li>
+        <a class="btn btn-primary" href="/rangers/new" role="button">Register first ranger</a>
     {{/if}}
 
-    <p><a href="/animals/new">Add new animal</a></P>
-    <p><a href="/endangers/new">Add endangered animal</a></p>
+    <a class="btn btn-primary" href="/animals/new" role="button">Add new Animal</a>
+    <a class="btn btn-primary" href="/endangers/new" role="button">Add Endangered Animal</a>
 
 {{/partial}}
 
