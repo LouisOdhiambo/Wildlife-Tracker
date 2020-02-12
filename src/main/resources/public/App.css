@@ -27,6 +27,12 @@ form{
     color: white;
 }
 
+form input{
+    background: none;
+}
+
 #rangerButton{
     margin-top: 5px;
+    background: none;
+    color: white;
 }
