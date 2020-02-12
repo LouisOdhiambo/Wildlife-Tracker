@@ -134,7 +134,7 @@ public class App {
 
 
 //post: process a form to update Ranger
-        post("/rangers/:id", (req, res) -> {
+        post("/rangers/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfRanger = Integer.parseInt(req.params("id"));
             String newRangerName = req.queryParams("newRangerName");
@@ -142,6 +142,5 @@ public class App {
             rangerDao.update(idOfRanger, newRangerName, newRangerLocation);
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
-
     }
 }
