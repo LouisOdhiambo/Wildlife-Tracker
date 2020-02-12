@@ -17,7 +17,9 @@
 
     {{#if animals}}
         {{#each animals }}
-            <p><a href="/rangers/{{rangerId}}/animals/{{id}}">{{animalName}}</a></p>
+            <div id="each-ranger">
+            <p id="each-rangerName"><a href="/rangers/{{rangerId}}/animals/{{id}}">{{animalName}}</a></p>
+            </div>
         {{/each}}
     {{else}}
         <p>No animals</p>
