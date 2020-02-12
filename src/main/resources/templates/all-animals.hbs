@@ -18,7 +18,7 @@
     {{#if animals}}
         {{#each animals }}
             <div id="each-ranger">
-            <p id="each-rangerName"><a href="/rangers/{{rangerId}}/animals/{{id}}">{{animalName}}</a></p>
+            <p id="each-rangerName">{{animalName}}</p>
             </div>
         {{/each}}
     {{else}}
@@ -30,7 +30,7 @@
     {{#if endangers}}
         {{#each endangers }}
             <div id="each-ranger">
-            <p id="each-rangerName"><a href="/rangers/{{rangerId}}/endangers/{{id}}">{{endangeredName}}</a></p>
+            <p id="each-rangerName">{{endangeredName}}</p>
             </div>
         {{/each}}
     {{else}}
