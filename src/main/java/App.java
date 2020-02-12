@@ -123,5 +123,25 @@ public class App {
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show a form to update Ranger
+        get("/rangers/:id/edit", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("editRanger", true);
+            Ranger ranger = rangerDao.findById(Integer.parseInt(req.params("id")));
+            model.put("ranger", ranger);
+            return new ModelAndView(model, "ranger-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+//post: process a form to update Ranger
+        post("/rangers/:id", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfRanger = Integer.parseInt(req.params("id"));
+            String newRangerName = req.queryParams("newRangerName");
+            String newRangerLocation = req.queryParams("newRangerLocation");
+            rangerDao.update(idOfRanger, newRangerName, newRangerLocation);
+            return new ModelAndView(model, "success.hbs");
+        }, new HandlebarsTemplateEngine());
+
     }
 }
