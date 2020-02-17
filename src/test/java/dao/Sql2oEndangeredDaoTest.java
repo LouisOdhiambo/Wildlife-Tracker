@@ -13,6 +13,8 @@ public class Sql2oEndangeredDaoTest {
     public static void setUp() throws Exception {
         String connectionString = "jdbc:postgresql://localhost:5432/wildlife_tracker_test";
         Sql2o sql2o = new Sql2o(connectionString, "mringaschool", "12345");
+//        String connectionString = "jdbc:postgresql://ec2-35-168-54-239.compute-1.amazonaws.com:5432/duvdiicoms0ov";
+//        Sql2o sql2o = new Sql2o(connectionString, "subsnlwvrpuxmf", "b32afb160a1086689aba010525ba26005db5d9ab925a97fa9a448111c5f738da");
         endangeredDao = new Sql2oEndangeredDao(sql2o);
         conn = sql2o.open();
     }

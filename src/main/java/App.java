@@ -12,18 +12,24 @@ import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import static spark.Spark.*;
 
-public class App {static int getHerokuAssignedPort() {
-    ProcessBuilder processBuilder = new ProcessBuilder();
-    if (processBuilder.environment().get("PORT") != null) {
-        return Integer.parseInt(processBuilder.environment().get("PORT"));
-    }
-    return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
-}
+public class App{
+
     public static void main(String[] args) {
-        port(getHerokuAssignedPort());
+        ProcessBuilder process = new ProcessBuilder();
+        Integer port;
+
+        if (process.environment().get("PORT") != null) {
+            port = Integer.parseInt(process.environment().get("PORT"));
+        } else {
+            port = 4567;
+        }
+        port(port);
+
         staticFileLocation("/public");
         String connectionString = "jdbc:postgresql://localhost:5432/wildlife_tracker";
         Sql2o sql2o = new Sql2o(connectionString, "mringaschool", "12345");
+//        String connectionString = "jdbc:postgresql://ec2-35-168-54-239.compute-1.amazonaws.com:5432/d10ev3qbim5c34";
+//        Sql2o sql2o = new Sql2o(connectionString, "gyanrlsrwskpxf", "4ce772d245a0bc8be5897edfef7dba5e389d30fbd5145568f13a493bcb6aace0");
         Sql2oAnimalDao animalDao = new Sql2oAnimalDao(sql2o);
         Sql2oEndangeredDao endangeredDao = new Sql2oEndangeredDao(sql2o);
         Sql2oRangerDao rangerDao = new Sql2oRangerDao(sql2o);

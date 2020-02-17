@@ -12,24 +12,22 @@
         </nav>
     </div>
 
-    <h1>{{ranger.rangerName}}</h1>
-    <p>Here are all the animals sighted by {{ranger.rangerName}} from {{ranger.rangerLocation}}:</p>
-    <ul>
-        {{#each animals}}
-            <li>
-                <p>{{animalName}}</p>
-            </li>
+    <h1 id="index-title">Wild-life Tracker</h1>
+
+    {{#if rangers}}
+        {{#each rangers}}
+            <div id="each-ranger">
+            <p id="each-rangerName">Ranger Name: {{rangerName}}</p>
+            <a class="btn btn-primary" href="/rangers/{{id}}" role="button">View Ranger Details</a>
+            </div>
         {{/each}}
-    </ul>
-    <p>Here are all the endangered animals sighted by {{ranger.rangerName}} from {{ranger.rangerLocation}}:</p>
-    <ul>
-        {{#each endangers}}
-            <li>
-                <p>{{endangeredName}}</p>
-            </li>
-        {{/each}}
-    </ul>
-    <a class="btn btn-info" href="/rangers/{{ranger.id}}/edit" role="button">Edit Ranger</a>
+    {{else}}
+        <a class="btn btn-primary" href="/rangers/new" role="button">Register first ranger</a>
+    {{/if}}
+
+    <a class="btn btn-primary" href="/animals/new" role="button">Add new Animal</a>
+    <a class="btn btn-primary" href="/endangers/new" role="button">Add Endangered Animal</a>
+
 {{/partial}}
 
 {{> layout.hbs}}
