@@ -23,6 +23,9 @@ animals. A user can also update their details for example when they change locat
 If you have postgres installed simply run the command (psql < create.sql to create the database)
 + Build the project using gradle and Run the project on local host.
 
+## Codebeat grade
+[![codebeat badge](https://codebeat.co/badges/b38d7f51-3044-4b4d-aac1-c336fa273bc5)](https://codebeat.co/projects/github-com-louis-crypto-wildlife-tracker-master)
+
 ## Known Bugs
 No known bugs at the point of development
 
