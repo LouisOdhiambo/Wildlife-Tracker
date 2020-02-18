@@ -12,11 +12,24 @@ import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import static spark.Spark.*;
 
-public class App {
+public class App{
+
     public static void main(String[] args) {
+        ProcessBuilder process = new ProcessBuilder();
+        Integer port;
+
+        if (process.environment().get("PORT") != null) {
+            port = Integer.parseInt(process.environment().get("PORT"));
+        } else {
+            port = 4567;
+        }
+        port(port);
+
         staticFileLocation("/public");
-        String connectionString = "jdbc:h2:~/wildlife_tracker.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        String connectionString = "jdbc:postgresql://localhost:5432/wildlife_tracker";
+        Sql2o sql2o = new Sql2o(connectionString, "mringaschool", "12345");
+//        String connectionString = "jdbc:postgresql://ec2-35-168-54-239.compute-1.amazonaws.com:5432/d10ev3qbim5c34";
+//        Sql2o sql2o = new Sql2o(connectionString, "gyanrlsrwskpxf", "4ce772d245a0bc8be5897edfef7dba5e389d30fbd5145568f13a493bcb6aace0");
         Sql2oAnimalDao animalDao = new Sql2oAnimalDao(sql2o);
         Sql2oEndangeredDao endangeredDao = new Sql2oEndangeredDao(sql2o);
         Sql2oRangerDao rangerDao = new Sql2oRangerDao(sql2o);
@@ -38,15 +51,6 @@ public class App {
             model.put("endangers", endangers);
             return new ModelAndView(model, "all-animals.hbs");
         }, new HandlebarsTemplateEngine());
-
-////    get: show all sighted endangered animals
-//    get("/all/animals", (req, res) ->{
-//        Map<String, Object> model = new HashMap<>();
-//        List<Endangered> endangers = endangeredDao.getAll();
-//        model.put("endangers", endangers);
-//        return new ModelAndView(model, "all-animals.hbs");
-//    }, new HandlebarsTemplateEngine());
-
 
 //    get: show new Ranger from
         get("/rangers/new", (req, res) -> {
@@ -134,7 +138,7 @@ public class App {
 
 
 //post: process a form to update Ranger
-        post("/rangers/:id", (req, res) -> {
+        post("/rangers/:id/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfRanger = Integer.parseInt(req.params("id"));
             String newRangerName = req.queryParams("newRangerName");
@@ -142,6 +146,5 @@ public class App {
             rangerDao.update(idOfRanger, newRangerName, newRangerLocation);
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
-
     }
 }
